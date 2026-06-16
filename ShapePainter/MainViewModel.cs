@@ -50,11 +50,18 @@ namespace ShapePainter
             await DbHelper.CreateDbAsync();
 
             var list = await DbHelper.GetShapesAsync();
-            Shapes.Clear();
-            foreach (var shape in list)
+
+            // Выполняем очистку и наполнение строго в главном (UI) потоке приложения
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                Shapes.Add(shape);
-            }
+                Shapes.Clear();
+                foreach (var shape in list)
+                {
+                    Shapes.Add(shape);
+                }
+            });
+
+            OnPropertyChanged(nameof(Shapes));
         }
 
         // Локальное добавление фигуры без обращения к БД на каждый клик

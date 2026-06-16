@@ -12,24 +12,25 @@ namespace ShapePainter
         {
             InitializeComponent();
             DataContext = viewModel;
-        }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
+            // ГАРАНТИРОВАННОЕ ИСПРАВЛЕНИЕ: Вызываем загрузку БД сразу при создании окна,
+            // не дожидаясь капризного события Loaded в XAML.
+            Dispatcher.InvokeAsync(async () =>
             {
-                // Попытка загрузить фигуры при старте (теперь они сами отобразятся!)
-                await viewModel.LoadShapesAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    $"Антисмачная ошибка при инициализации или загрузке БД:\n\n{ex.Message}\n\nСтек вызовов:\n{ex.StackTrace}",
-                    "Критическая ошибка запуска",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error
-                );
-            }
+                try
+                {
+                    await viewModel.LoadShapesAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Антисмачная ошибка при инициализации или загрузке БД:\n\n{ex.Message}\n\nСтек вызовов:\n{ex.StackTrace}",
+                        "Критическая ошибка запуска",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
+            });
         }
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
