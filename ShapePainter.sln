@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37111.16 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapePainter", "ShapePainter\ShapePainter.csproj", "{89C175CD-D028-4CF8-8FC9-AD29F9D3FD4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89C175CD-D028-4CF8-8FC9-AD29F9D3FD4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C175CD-D028-4CF8-8FC9-AD29F9D3FD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C175CD-D028-4CF8-8FC9-AD29F9D3FD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C175CD-D028-4CF8-8FC9-AD29F9D3FD4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD46033C-AEB2-4D46-AB89-EA3FB8A983E0}
+	EndGlobalSection
+EndGlobal
