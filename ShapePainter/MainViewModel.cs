@@ -51,7 +51,7 @@ namespace ShapePainter
 
             var list = await DbHelper.GetShapesAsync();
 
-            // Выполняем очистку и наполнение строго в главном (UI) потоке приложения
+            // Выполняем очистку и наполнение строго в глав ном (UI) потоке приложения
             Application.Current.Dispatcher.Invoke(() =>
             {
                 Shapes.Clear();

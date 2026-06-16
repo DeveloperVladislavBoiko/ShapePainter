@@ -2,7 +2,7 @@
 
 namespace ShapePainter
 {
-    public class DbShape
+    public class DbShape 
     {
         public long Id { get; set; }
         public double X { get; set; }

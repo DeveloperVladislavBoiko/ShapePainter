@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ShapePainter
+namespace ShapePainter 
 {
     public enum ShapeType
     {

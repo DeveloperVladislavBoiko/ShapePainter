@@ -183,7 +183,7 @@ namespace ShapePainter
             long? id = (long?)await cmd.ExecuteScalarAsync();
             shape.Id = id ?? 0L;
         }
-
+         
         public static async Task ClearAllShapesAsync()
         {
             EnsureDataSourceInitialized();
