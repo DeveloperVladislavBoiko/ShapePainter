@@ -24,7 +24,7 @@ namespace ShapePainter
         {
             return canExecute == null || canExecute(parameter);
         }
-
+         
         public void Execute(object? parameter)
         {
             execute(parameter);

@@ -8,4 +8,4 @@ namespace ShapePainter
         [Display(Name = "Смачный прямоугольник")]
         Rectangle
     }
-}
+} 
