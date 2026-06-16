@@ -18,7 +18,7 @@ namespace ShapePainter
         {
             try
             {
-                // Попытка загрузить фигуры при старте
+                // Попытка загрузить фигуры при старте (теперь они сами отобразятся!)
                 await viewModel.LoadShapesAsync();
             }
             catch (Exception ex)
@@ -32,21 +32,21 @@ namespace ShapePainter
             }
         }
 
-        private async void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             try
             {
                 // Получаем координаты относительно холста
                 Point clickPoint = e.GetPosition((IInputElement)sender);
 
-                // Передаем координаты во ViewModel для сохранения в БД
-                await viewModel.AddRectangleAsync(clickPoint.X, clickPoint.Y);
+                // Передаем координаты во ViewModel для локального добавления
+                viewModel.AddRectangleLocal(clickPoint.X, clickPoint.Y);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    $"Ошибка при попытке нарисовать и сохранить фигуру:\n\n{ex.Message}",
-                    "Ошибка взаимодействия с БД",
+                    $"Ошибка при попытке нарисовать фигуру:\n\n{ex.Message}",
+                    "Ошибка взаимодействия",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning
                 );

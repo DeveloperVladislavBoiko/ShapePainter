@@ -12,6 +12,7 @@ namespace ShapePainter
         public ObservableCollection<DbShape> Shapes { get; set; } = new ObservableCollection<DbShape>();
 
         public RelayCommand ClearAllCommand { get; init; }
+        public RelayCommand SaveCommand { get; init; } // Новая команда сохранения
 
         public MainViewModel()
         {
@@ -23,7 +24,23 @@ namespace ShapePainter
                 }
                 catch (Exception ex)
                 {
+                    // ИСПРАВЛЕНО: Убран лишний знак доллара
                     MessageBox.Show($"Не удалось удалить фигуры: {ex.Message}", "Ошибка очистки", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            });
+
+            // Реализация команды сохранения
+            SaveCommand = new RelayCommand(async (o) =>
+            {
+                try
+                {
+                    await SaveAllShapesAsync();
+                    MessageBox.Show("Все фигуры успешно сохранены в базе данных!", "Сохранение", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    // ИСПРАВЛЕНО: Убран лишний знак доллара
+                    MessageBox.Show($"Не удалось сохранить фигуры: {ex.Message}", "Ошибка сохранения", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             });
         }
@@ -40,7 +57,8 @@ namespace ShapePainter
             }
         }
 
-        public async Task AddRectangleAsync(double x, double y)
+        // Локальное добавление фигуры без обращения к БД на каждый клик
+        public void AddRectangleLocal(double x, double y)
         {
             var newShape = new DbShape
             {
@@ -51,8 +69,20 @@ namespace ShapePainter
                 Type = ShapeType.Rectangle
             };
 
-            await DbHelper.AddShapeAsync(newShape);
             Shapes.Add(newShape);
+        }
+
+        // Метод сохранения текущего набора фигур в БД
+        private async Task SaveAllShapesAsync()
+        {
+            // Сначала очищаем старые записи в таблице, чтобы не дублировать
+            await DbHelper.ClearAllShapesAsync();
+
+            // Переносим всё из памяти в базу
+            foreach (var shape in Shapes)
+            {
+                await DbHelper.AddShapeAsync(shape);
+            }
         }
 
         private async Task ClearAllShapesAsync()
